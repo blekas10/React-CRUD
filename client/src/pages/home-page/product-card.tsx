@@ -8,11 +8,11 @@ import {
 import Img from 'components/ui/img';
 import * as Styled from './styled';
 
-type HouseCardProps = HouseModel;
+type ProductCardProps = ProductModel;
 
-const HouseCard: React.FC<HouseCardProps> = ({
+const ProductCard: React.FC<ProductCardProps> = ({
   title,
-  location,
+  description,
   images,
   price,
   rating,
@@ -27,7 +27,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
         </Box>
 
         <Typography sx={{ fontSize: '1.15rem', fontWeight: 500 }}>{title}</Typography>
-        <Typography variant="subtitle2">{`${location.country}, ${location.city}`}</Typography>
+        <Typography variant="subtitle2">{`${description} aaa`}</Typography>
       </Box>
 
       <Button color="primary" variant="contained" sx={{ mt: 3 }}>View</Button>
@@ -35,4 +35,4 @@ const HouseCard: React.FC<HouseCardProps> = ({
   </Stack>
 );
 
-export default HouseCard;
+export default ProductCard;

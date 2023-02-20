@@ -9,14 +9,14 @@ const api = axios.create({
   },
 });
 
-const fetchHouses = async () => {
-  const response = await api.get<HouseModel[]>('/houses');
+const fetchProducts = async () => {
+  const response = await api.get<ProductModel[]>('/products');
 
   return response.data;
 };
 
 const ApiService = {
-  fetchHouses,
+  fetchProducts,
 };
 
 export default ApiService;

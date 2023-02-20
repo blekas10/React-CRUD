@@ -1,10 +1,7 @@
-type HouseModel = {
+type ProductModel = {
   id: string,
   title: string,
-  location: {
-    country: string,
-    city: string
-  },
+  description: string,
   images: string[],
   price: string,
   rating: number
