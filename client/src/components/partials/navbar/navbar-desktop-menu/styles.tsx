@@ -12,6 +12,6 @@ export const navbarDesktopItemStyles = (theme: Theme) => ({
     color: theme.palette.common.white,
   },
   '&.active': {
-    boxShadow: `inset 0 -4px 0 ${theme.palette.common.white}`,
+    boxShadow: `inset 4px 0 0 0 ${theme.palette.common.white}`,
   },
 });
