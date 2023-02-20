@@ -3,7 +3,7 @@ import { styled, Stack } from '@mui/material';
 export const HousesGrid = styled('div')(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
-  gap: theme.spacing(2),
+  gap: theme.spacing(4),
   padding: theme.spacing(2),
   maxWidth: theme.breakpoints.values.xl,
   margin: 'auto',

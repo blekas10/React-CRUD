@@ -18,19 +18,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
   rating,
 }) => (
   <Stack sx={{ boxShadow: 4 }}>
-    <Img src={images[0]} alt="" sx={{ aspectRatio: '1.42', width: 1 }} />
+    <Img src={images[0]} alt="" sx={{ aspectRatio: '1', width: 1 }} />
     <Styled.HouseCardContent>
       <Box sx={{ flexGrow: 1 }}>
-        <Box sx={{ float: 'right', textAlign: 'right' }}>
-          <Box sx={{ fontSize: '1.3rem', color: 'primary.main', fontWeight: 600 }}>{price}</Box>
+        
+        <Typography sx={{ fontSize: '1.15rem', fontWeight: 500, paddingBottom: 2 }}>{title}</Typography>
+        <Typography variant="subtitle2" sx={{ height:80}}>{`${description}`}</Typography>
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', paddingTop: 1}}>
+          <Box sx={{ fontSize: '1.3rem', color: 'grey.700', fontWeight: 600 }}>{price}</Box>
           <Styled.HouseCardRating>{rating}</Styled.HouseCardRating>
         </Box>
-
-        <Typography sx={{ fontSize: '1.15rem', fontWeight: 500 }}>{title}</Typography>
-        <Typography variant="subtitle2">{`${description} aaa`}</Typography>
+      
       </Box>
 
-      <Button color="primary" variant="contained" sx={{ mt: 3 }}>View</Button>
+      <Box sx={{ display: 'flex', justifyContent: 'space-around'}}>
+       <Button color="primary" variant="contained" sx={{ mt: 3 }}>Plačiau</Button>
+       <Button color="primary" variant="outlined" sx={{ mt: 3 }}>į krepšelį</Button>
+      </Box>
+      
     </Styled.HouseCardContent>
   </Stack>
 );

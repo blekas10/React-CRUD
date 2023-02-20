@@ -5,6 +5,7 @@ import NavbarDesktopMenu from './navbar-desktop-menu';
 import NavbarMobileMenu from './navbar-mobile-menu';
 import NavbarToggler from './navbar-toggler';
 
+
 const Navbar = () => {
   const [isDrawerOpen, setIsDrowerOpen] = React.useState(false);
   const closeDrawer = () => setIsDrowerOpen(false);
@@ -12,7 +13,7 @@ const Navbar = () => {
 
   return (
     <AppBar position="fixed">
-      <Toolbar sx={{ justifyContent: { xs: 'flex-end', [extendBr]: 'flex-start' } }}>
+      <Toolbar sx={{justifyContent: { xs: 'flex-end', [extendBr]: 'flex-start' } }}>
         <NavbarDesktopMenu />
         <NavbarToggler isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
         <NavbarMobileMenu isDrawerOpen={isDrawerOpen} closeDrawer={closeDrawer} />
