@@ -12,7 +12,7 @@ export type LinksGroup = {
 };
 
 export const mainLinks: Link[] = [
-  { to: routes.HomePage, text: 'Home' },
+  { to: routes.HomePage, text: 'AivaraiNiuchink' },
 ];
 
 export const linksGroups: LinksGroup[] = [];
