@@ -14,9 +14,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Styled.HousesGrid>
+    <Styled.ProductsGrid>
       {products.map((productProps) => (<ProductCard key={productProps.id} {...productProps} />))}
-    </Styled.HousesGrid>
+    </Styled.ProductsGrid>
   );
 };
 

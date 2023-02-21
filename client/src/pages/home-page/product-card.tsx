@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => (
   <Stack sx={{ boxShadow: 4 }}>
     <Img src={images[0]} alt="" sx={{ aspectRatio: '1', width: 1 }} />
-    <Styled.HouseCardContent>
+    <Styled.ProductCardContent>
       <Box sx={{ flexGrow: 1 }}>
         
         <Typography sx={{ fontSize: '1.15rem', fontWeight: 500, paddingBottom: 2 }}>{title}</Typography>
@@ -27,7 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         <Box sx={{ display: 'flex', justifyContent: 'space-around', paddingTop: 1}}>
           <Box sx={{ fontSize: '1.3rem', color: 'grey.700', fontWeight: 600 }}>{price}</Box>
-          <Styled.HouseCardRating>{rating}</Styled.HouseCardRating>
+          <Styled.ProductCardRating>{rating}</Styled.ProductCardRating>
         </Box>
       
       </Box>
@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
        <Button color="primary" variant="outlined" sx={{ mt: 3 }}>į krepšelį</Button>
       </Box>
       
-    </Styled.HouseCardContent>
+    </Styled.ProductCardContent>
   </Stack>
 );
 

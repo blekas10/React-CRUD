@@ -1,6 +1,6 @@
 import { styled, Stack } from '@mui/material';
 
-export const HousesGrid = styled('div')(({ theme }) => ({
+export const ProductsGrid = styled('div')(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
   gap: theme.spacing(4),
@@ -18,13 +18,13 @@ export const HousesGrid = styled('div')(({ theme }) => ({
   },
 }));
 
-export const HouseCardContent = styled(Stack)(({ theme }) => ({
+export const ProductCardContent = styled(Stack)(({ theme }) => ({
   flexGrow: 1,
   width: '100%',
   padding: theme.spacing(1, 2, 2),
 }));
 
-export const HouseCardRating = styled('div')(({ theme }) => ({
+export const ProductCardRating = styled('div')(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'flex-end',
   fontSize: '1.3rem',
