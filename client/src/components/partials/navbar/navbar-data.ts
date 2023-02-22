@@ -12,7 +12,8 @@ export type LinksGroup = {
 };
 
 export const mainLinks: Link[] = [
-  { to: routes.HomePage, text: 'AivaraiNiuchink' },
+  { to: routes.HomePage, text: 'Pagrindinis' },
+  { to: routes.ProductFormPage, text: 'Sukurti naują' },
 ];
 
 export const linksGroups: LinksGroup[] = [];
