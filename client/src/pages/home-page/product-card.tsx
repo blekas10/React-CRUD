@@ -24,7 +24,30 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
 
-    <Stack sx={{ boxShadow: 4 }}>
+    <Stack sx={{ boxShadow: 4, position: ' relative' }}>
+
+      <Button
+        onClick={() => console.log(`trinamas id ${id}`)}
+        variant="outlined"
+        size="small"
+        color="error"
+        sx={{
+          position: 'absolute', right: 10, top: 10, minWidth: ' initial',
+        }}
+      >
+        X
+      </Button>
+      <Button
+        onClick={() => navigate(routes.UpdateProductPage.createLink(id))}
+        variant="outlined"
+        size="small"
+        color="warning"
+        sx={{
+          position: 'absolute', right: 60, top: 10, minWidth: ' initial',
+        }}
+      >
+        Ed
+      </Button>
       <Img src={images[0]} alt="" sx={{ aspectRatio: '1', width: 1 }} />
       <Styled.ProductCardContent>
         <Box sx={{ flexGrow: 1 }}>

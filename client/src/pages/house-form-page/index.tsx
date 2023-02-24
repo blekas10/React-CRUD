@@ -4,103 +4,115 @@ import {
   Typography,
   TextField,
   Paper,
-  Box,
-  InputAdornment,
-  IconButton,
   Button,
-  Rating,
+
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ApiService from 'services/api-service';
+import { useNavigate, useParams } from 'react-router-dom';
+import useProduct from 'hooks/use-product';
+import * as Styled from './styled';
+import DescriptionField from './description-field';
+import ImagesField from './images-field';
+import RatingField from './rating-field';
+import { getProductFormValues } from './helpers';
+import { getModeData } from './data';
 
-const ProductFormPage = () => (
-  <Stack sx={{
-    py: { xs: 2, md: 6, xl: 10 },
-    px: 2,
-    alignItems: 'center',
-  }}
-  >
-    <Paper
-      component="form"
-      elevation={6}
-      sx={{ p: 3, width: (theme) => ({ xs: 1, sm: theme.breakpoints.values.sm }) }}
+const ProductFormPage = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [product, setProduct] = React.useState<undefined | ProductModel>(undefined);
+  const formRef = React.useRef<undefined | HTMLFormElement>(undefined);
+  const mode = id !== undefined ? 'edit' : 'create';
+  const {
+    title,
+    btnText,
+    color,
+    colorMain,
+  } = getModeData(mode);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const values = getProductFormValues(formRef.current);
+      if (mode === 'create') {
+        // TODO: Atlikti sukurimo darbus ir po sukurimo, nuvesti į
+        // TODO: pagrindinį puslapį arba sukurto produkto puslapį
+        console.log('Vykdomas sukūrimas');
+        console.log(values);
+      } else {
+        // TODO: Atlikti sukurimo darbus ir po sukurimo, nuvesti į pagrindinį puslapį
+        console.log('Vykdomas sukūrimas');
+        console.log(values);
+        await ApiService.createProduct(values);
+        console.log('Team created successfully!');
+
+        navigate('/');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('Error on form submit. Contact system administrator.');
+      }
+    }
+  };
+  React.useEffect(() => {
+    if (id !== undefined) {
+      (async () => {
+        const fetchedTeam = await ApiService.fetchProduct(id);
+        setProduct(fetchedTeam);
+      })();
+    }
+  }, []);
+
+  return (
+    <Styled.PageLayout sx={{
+      py: { xs: 2, md: 6, xl: 10 },
+      px: 2,
+      alignItems: 'center',
+    }}
     >
-      <Stack sx={{ gap: 2, alignItems: 'center' }}>
-        <AddIcon sx={{ fontSize: 60, color: 'primary.main' }} />
-        <Typography variant="h4" color="primary">Pridėti produktą</Typography>
-        <TextField
-          label="Pavadinimas"
-          fullWidth
-          variant="filled"
-          size="small"
-        />
-        <Box sx={{ display: 'flex', width: 1, gap: 2 }}>
+      <Paper
+        component="form"
+        onSubmit={handleSubmit}
+        ref={formRef}
+        elevation={6}
+        sx={{ p: 3, width: (theme) => ({ xs: 1, sm: theme.breakpoints.values.sm }) }}
+      >
+        <Stack sx={{ gap: 2, alignItems: 'center' }}>
+          <AddIcon sx={{ fontSize: 60, color: 'primary.main' }} />
+          <Typography variant="h4" color="primary">Pridėti produktą</Typography>
           <TextField
-            label="Aprašymas"
+            label="Pavadinimas"
+            name="title"
             fullWidth
-            multiline
             variant="filled"
             size="small"
-            rows={3}
+            color={color}
+            defaultValue={house?.title}
           />
-        </Box>
-        <TextField
-          label="Kaina"
-          type="number"
-          inputProps={{ step: '0.01' }}
-          fullWidth
-          variant="filled"
-          size="small"
-        />
-        <Box sx={{ width: 1 }}>
-          <Typography component="legend">Images</Typography>
-          <Stack sx={{ gap: 2 }}>
-            <TextField
-              label="Nuotrauka"
-              fullWidth
-              variant="filled"
-              size="small"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              label="Nuotrauka"
-              fullWidth
-              variant="filled"
-              size="small"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Stack>
-          <IconButton>
-            <AddCircleIcon sx={{ fontSize: 38, color: 'primary.main' }} />
-          </IconButton>
-        </Box>
+          <DescriptionField />
+          <TextField
+            label="Kaina"
+            name="price"
+            type="number"
+            inputProps={{ step: '0.01' }}
+            fullWidth
+            variant="filled"
+            size="small"
+          />
+          <ImagesField />
 
-        <Box sx={{ alignSelf: 'flex-start' }}>
-          <Typography component="legend">Įvertinimas</Typography>
-          <Rating />
-        </Box>
-        <Button variant="contained" color="primary" size="large" fullWidth>Pridėti</Button>
-      </Stack>
-    </Paper>
+          <RatingField />
 
-  </Stack>
-);
+          <Button type="submit" variant="contained" color="primary" size="large" fullWidth>Pridėti</Button>
+        </Stack>
+      </Paper>
+
+    </Styled.PageLayout>
+  );
+};
 
 export default ProductFormPage;

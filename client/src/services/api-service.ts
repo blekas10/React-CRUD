@@ -9,6 +9,15 @@ const api = axios.create({
   },
 });
 
+type CreateProductRequest = Omit<ProductModel, 'id'>;
+
+// eslint-disable-next-line @typescript-eslint/no-shadow
+const createProduct = async (getProductFormValues: CreateProductRequest) => {
+  const response = await api.post<ProductModel>('/products', getProductFormValues);
+
+  return response.data;
+};
+
 const fetchProducts = async () => {
   const response = await api.get<ProductModel[]>('/products');
 
@@ -22,6 +31,7 @@ const fetchProduct = async (id: string | number) => {
 };
 
 const ApiService = {
+  createProduct,
   fetchProducts,
   fetchProduct,
 };
