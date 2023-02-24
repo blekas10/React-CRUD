@@ -10,7 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import routes from 'navigation/routes';
 import * as Styled from './styled';
 
-type ProductCardProps = ProductModel;
+type ProductCardProps = ProductModel & {
+  onDelete: VoidFunction,
+};
 
 const ProductCard: React.FC<ProductCardProps> = ({
   id,
@@ -19,6 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   images,
   price,
   rating,
+  onDelete,
 }) => {
   const navigate = useNavigate();
 
@@ -27,13 +30,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <Stack sx={{ boxShadow: 4, position: ' relative' }}>
 
       <Button
-        onClick={() => console.log(`trinamas id ${id}`)}
+
         variant="outlined"
         size="small"
         color="error"
         sx={{
           position: 'absolute', right: 10, top: 10, minWidth: ' initial',
         }}
+        onClick={onDelete}
       >
         X
       </Button>

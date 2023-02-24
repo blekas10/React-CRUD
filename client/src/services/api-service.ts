@@ -17,6 +17,11 @@ const createProduct = async (getProductFormValues: CreateProductRequest) => {
 
   return response.data;
 };
+const updateProduct = async (id: string, ProductData: Omit<ProductModel, 'id'>) => {
+  const response = await api.put<ProductModel[]>(`/products/${id}`, ProductData);
+
+  return response.data;
+};
 
 const fetchProducts = async () => {
   const response = await api.get<ProductModel[]>('/products');
@@ -30,10 +35,16 @@ const fetchProduct = async (id: string | number) => {
   return response.data;
 };
 
+const deleteProduct = async (id: string | number) => {
+  await api.delete(`products/${id}`);
+};
+
 const ApiService = {
+  updateProduct,
   createProduct,
   fetchProducts,
   fetchProduct,
+  deleteProduct,
 };
 
 export default ApiService;

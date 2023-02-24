@@ -1,5 +1,5 @@
 const singleProductPageRoot = '/product/';
-const updateProductPageRoot = '/update-house/';
+const updateProductPageRoot = '/update-product/';
 
 const staticRoutes = {
   HomePage: '/',

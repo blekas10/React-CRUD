@@ -3,6 +3,6 @@ type ProductModel = {
   title: string,
   description: string,
   images: string[],
-  price: string,
+  price: number,
   rating: number
 };

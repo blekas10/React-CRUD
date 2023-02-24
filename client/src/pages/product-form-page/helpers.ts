@@ -25,7 +25,7 @@ export const getProductFormValues = (form: HTMLFormElement | undefined): Omit<Pr
 
   const values = {
     title,
-    price: `${price}€`,
+    price: Number(price),
     description,
     rating: Number(rating),
     images: images.filter((img) => img !== ''),

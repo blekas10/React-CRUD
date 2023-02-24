@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import NavbarLayout from 'components/layouts/navbar-layout';
 import HomePage from 'pages/home-page';
 import SingleProductPage from 'pages/single-product-page';
-import ProductFormPage from 'pages/house-form-page';
+import ProductFormPage from 'pages/product-form-page';
 import routes from './routes';
 
 const router = createBrowserRouter([
@@ -16,12 +16,16 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: routes.SingleProductPage.path,
+        element: <SingleProductPage />,
+      },
+      {
         path: routes.ProductFormPage,
         element: <ProductFormPage />,
       },
       {
-        path: routes.SingleProductPage.path,
-        element: <SingleProductPage />,
+        path: routes.UpdateProductPage.path,
+        element: <ProductFormPage />,
       },
 
     ],

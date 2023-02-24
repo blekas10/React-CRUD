@@ -11,8 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import ApiService from 'services/api-service';
 import { useNavigate, useParams } from 'react-router-dom';
 import useProduct from 'hooks/use-product';
+import routes from 'navigation/routes';
 import * as Styled from './styled';
-import DescriptionField from './description-field';
 import ImagesField from './images-field';
 import RatingField from './rating-field';
 import { getProductFormValues } from './helpers';
@@ -21,34 +21,23 @@ import { getModeData } from './data';
 const ProductFormPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [product, setProduct] = React.useState<undefined | ProductModel>(undefined);
+  const [product, loadingProductData] = useProduct(id);
   const formRef = React.useRef<undefined | HTMLFormElement>(undefined);
   const mode = id !== undefined ? 'edit' : 'create';
   const {
-    title,
-    btnText,
     color,
-    colorMain,
   } = getModeData(mode);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
       const values = getProductFormValues(formRef.current);
       if (mode === 'create') {
-        // TODO: Atlikti sukurimo darbus ir po sukurimo, nuvesti į
-        // TODO: pagrindinį puslapį arba sukurto produkto puslapį
-        console.log('Vykdomas sukūrimas');
-        console.log(values);
-      } else {
-        // TODO: Atlikti sukurimo darbus ir po sukurimo, nuvesti į pagrindinį puslapį
-        console.log('Vykdomas sukūrimas');
-        console.log(values);
         await ApiService.createProduct(values);
-        console.log('Team created successfully!');
-
-        navigate('/');
+        navigate(routes.HomePage);
+      } else {
+        await ApiService.updateProduct(id as any, values);
+        navigate(routes.SingleProductPage.createLink(id as any));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -58,14 +47,8 @@ const ProductFormPage = () => {
       }
     }
   };
-  React.useEffect(() => {
-    if (id !== undefined) {
-      (async () => {
-        const fetchedTeam = await ApiService.fetchProduct(id);
-        setProduct(fetchedTeam);
-      })();
-    }
-  }, []);
+
+  if (loadingProductData) return null;
 
   return (
     <Styled.PageLayout sx={{
@@ -91,26 +74,32 @@ const ProductFormPage = () => {
             variant="filled"
             size="small"
             color={color}
-            defaultValue={house?.title}
+            defaultValue={product?.title}
           />
-          <DescriptionField />
+          <TextField
+            label="Aprašymas"
+            name="description"
+            fullWidth
+            multiline
+            variant="filled"
+            size="small"
+            rows={3}
+            defaultValue={product?.description}
+          />
           <TextField
             label="Kaina"
             name="price"
             type="number"
-            inputProps={{ step: '0.01' }}
             fullWidth
             variant="filled"
             size="small"
+            defaultValue={product?.price}
           />
-          <ImagesField />
-
-          <RatingField />
-
+          <ImagesField defaultImages={product?.images} />
+          <RatingField defaultValue={product?.rating} />
           <Button type="submit" variant="contained" color="primary" size="large" fullWidth>Pridėti</Button>
         </Stack>
       </Paper>
-
     </Styled.PageLayout>
   );
 };
