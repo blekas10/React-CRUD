@@ -59,6 +59,8 @@ const SingleProductPage = () => {
               Kaina:
               {' '}
               {product.price}
+              {' '}
+
             </Box>
             <Box>
               Įvertinimas:
@@ -185,6 +187,7 @@ const SingleProductPage = () => {
               Kaina:
               {' '}
               {product.price}
+              €
             </Box>
             <Box>
               Įvertinimas:
