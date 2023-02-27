@@ -47,10 +47,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         size="small"
         color="warning"
         sx={{
-          position: 'absolute', right: 60, top: 10, minWidth: ' initial',
+          position: 'absolute', right: 45, top: 10, minWidth: ' initial',
         }}
       >
-        Ed
+        Edit
       </Button>
       <Img src={images[0]} alt="" sx={{ aspectRatio: '1', width: 1 }} />
       <Styled.ProductCardContent>
